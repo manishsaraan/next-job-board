@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Background from "./Background";
 import Container from "./Container";
 import Footer from "./Footer";
@@ -12,33 +12,11 @@ import ResultsCount from "./ResultsCount";
 import SortingControls from "./SortingControls";
 import JobList from "./JobList";
 import PaginationControls from "./PaginationControls";
+import useJobItems from "../hooks/useJobItems";
 
 function App() {
-  const [jobItems, setJobItems] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (searchText.length > 0) {
-      fetchJobs(searchText);
-    }
-  }, [searchText]);
-
-  const fetchJobs = async (searchText: string) => {
-    try {
-      setIsLoading(true);
-      const res = await fetch(
-        `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchText}`
-      );
-      const data = await res.json();
-
-      console.log(data);
-      setJobItems(data.jobItems);
-      setIsLoading(false);
-    } catch (e) {
-      setIsLoading(false);
-    }
-  };
+  const { isLoading, jobItems } = useJobItems(searchText);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
