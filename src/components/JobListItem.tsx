@@ -6,7 +6,6 @@ type JobListItemProp = {
 };
 
 export default function JobListItem({ jobItem }: JobListItemProp) {
-  console.log(jobItem, "JobItem");
   return (
     <li className="job-item">
       <a className="job-item__link">
