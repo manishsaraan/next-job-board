@@ -16,7 +16,7 @@ import useJobItems from "../hooks/useJobItems";
 
 function App() {
   const [searchText, setSearchText] = useState("");
-  const { isLoading, jobItems } = useJobItems(searchText);
+  const [isLoading, jobItems] = useJobItems(searchText);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
