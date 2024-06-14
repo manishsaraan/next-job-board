@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Background from "./Background";
 import Container from "./Container";
 import Footer from "./Footer";
@@ -13,10 +13,12 @@ import SortingControls from "./SortingControls";
 import JobList from "./JobList";
 import PaginationControls from "./PaginationControls";
 import useJobItems from "../hooks/useJobItems";
+import useGetActiveid from "../hooks/useGetActiveId";
 
 function App() {
   const [searchText, setSearchText] = useState("");
   const [isLoading, jobItems] = useJobItems(searchText);
+  const activeId = useGetActiveid();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
