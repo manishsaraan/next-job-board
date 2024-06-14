@@ -6,7 +6,7 @@ export default function useGetActiveid() {
   useEffect(() => {
     const manageHashChange = () => {
       const id = Number(window.location.hash.slice(1));
-      console.log(id);
+
       setActiveId(id);
     };
 
