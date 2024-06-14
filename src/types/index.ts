@@ -5,3 +5,14 @@ export type JobItem = {
   company: string;
   daysAgo: string;
 };
+
+export type JobItemExpanded = JobItem & {
+  description: string;
+  qualifications: string[];
+  reviews: string[];
+  duration: string;
+  salary: string;
+  location: string;
+  coverImgURL: string;
+  compayURL: string;
+};
