@@ -13,10 +13,13 @@ import SortingControls from "./SortingControls";
 import JobList from "./JobList";
 import PaginationControls from "./PaginationControls";
 import useJobItems from "../hooks/useJobItems";
+import useDebounce from "../hooks/useDebounce";
 
 function App() {
   const [searchText, setSearchText] = useState("");
-  const { isLoading, jobItems, totalNumberOfResults } = useJobItems(searchText);
+  const debouncedSearchText = useDebounce(searchText, 250);
+  const { isLoading, jobItems, totalNumberOfResults } =
+    useJobItems(debouncedSearchText);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);

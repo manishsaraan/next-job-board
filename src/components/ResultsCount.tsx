@@ -1,3 +1,5 @@
+import useDebounce from "../hooks/useDebounce";
+
 type ResultsCountProp = {
   totalNumberOfResults: number;
 };
@@ -5,9 +7,10 @@ type ResultsCountProp = {
 export default function ResultsCount({
   totalNumberOfResults,
 }: ResultsCountProp) {
+  const debouncedResults = useDebounce(totalNumberOfResults, 1000);
   return (
     <p className="count">
-      <span className="bold">{totalNumberOfResults}</span> results
+      <span className="bold">{debouncedResults}</span> results
     </p>
   );
 }
