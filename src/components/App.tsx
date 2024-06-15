@@ -16,7 +16,7 @@ import useJobItems from "../hooks/useJobItems";
 
 function App() {
   const [searchText, setSearchText] = useState("");
-  const [isLoading, jobItems] = useJobItems(searchText);
+  const { isLoading, jobItems, totalNumberOfResults } = useJobItems(searchText);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -35,7 +35,7 @@ function App() {
       <Container>
         <Sidebar>
           <SidebarTop>
-            <ResultsCount />
+            <ResultsCount totalNumberOfResults={totalNumberOfResults} />
             <SortingControls />
           </SidebarTop>
           <JobList isLoading={isLoading} jobItems={jobItems} />

@@ -8,18 +8,19 @@ export default function useJobItem(id: number | null) {
 
   useEffect(() => {
     if (!id) return;
-    getJobItem(id);
     try {
+      getJobItem(id);
     } catch (error) {}
   }, [id]);
 
   const getJobItem = async (id: number) => {
-    setLoading(false);
+    setLoading(true);
     const resp = await fetch(`${BASE_URL}/${id}`);
     const data = await resp.json();
+
     setJobItem(data.jobItem);
-    setLoading(true);
+    setLoading(false);
   };
 
-  return [loading, jobItem] as const;
+  return { loading, jobItem } as const;
 }
