@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { JobItem } from "../types";
 import { BASE_URL } from "../constants";
+import { useQuery } from "@tanstack/react-query";
 
 export default function useJobItems(searchText: string) {
   const [jobItems, setJobItems] = useState<JobItem[]>([]);
