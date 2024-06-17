@@ -19,8 +19,8 @@ function App() {
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText, 250);
   const { isLoading, jobItems } = useJobItems(debouncedSearchText);
-  const jobItemSliced = jobItems.slice(0, 7);
-  const totalNumberOfResults = jobItems.length;
+  const jobItemSliced = jobItems?.slice(0, 7);
+  const totalNumberOfResults = jobItems?.length;
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
