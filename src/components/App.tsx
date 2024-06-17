@@ -18,8 +18,9 @@ import useDebounce from "../hooks/useDebounce";
 function App() {
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText, 250);
-  const { isLoading, jobItems, totalNumberOfResults } =
-    useJobItems(debouncedSearchText);
+  const { isLoading, jobItems } = useJobItems(debouncedSearchText);
+  const jobItemSliced = jobItems.slice(0, 7);
+  const totalNumberOfResults = jobItems.length;
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -41,7 +42,7 @@ function App() {
             <ResultsCount totalNumberOfResults={totalNumberOfResults} />
             <SortingControls />
           </SidebarTop>
-          <JobList isLoading={isLoading} jobItems={jobItems} />
+          <JobList isLoading={isLoading} jobItems={jobItemSliced} />
           <PaginationControls />
         </Sidebar>
         <JobItemContent />

@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
 import { JobItem } from "../types";
 import { BASE_URL } from "../constants";
-import { useQuery } from "@tanstack/react-query";
 
 export default function useJobItems(searchText: string) {
   const [jobItems, setJobItems] = useState<JobItem[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
-
-  const totalNumberOfResults = jobItems.length;
-  const jobItemSliced = jobItems.slice(0, 7);
 
   useEffect(() => {
     if (searchText.length > 0) {
@@ -31,5 +27,5 @@ export default function useJobItems(searchText: string) {
     }
   };
 
-  return { isLoading, jobItems: jobItemSliced, totalNumberOfResults } as const;
+  return { isLoading, jobItems } as const;
 }
