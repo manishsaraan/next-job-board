@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { JobItem } from "../types";
 import { BASE_URL } from "../constants";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import handleError from "../utils/handleError";
 
 // export default function useJobItems(searchText: string) {
 //   const [jobItems, setJobItems] = useState<JobItem[]>([]);
@@ -39,6 +41,12 @@ const fetchJobItems = async (
   jobItems: JobItem[];
 }> => {
   const res = await fetch(`${BASE_URL}?search=${searchText}`);
+
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.description);
+  }
+
   const data = await res.json();
 
   return data;
@@ -53,7 +61,7 @@ export default function useJobItems(searchText: string) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: !!searchText,
-      onError: () => {},
+      onError: handleError,
     }
   );
 
@@ -64,6 +72,6 @@ export default function useJobItems(searchText: string) {
     };
   }
 
-  const jobItems = data?.jobItems;
+  const jobItems = data?.jobItems || [];
   return { isLoading: isInitialLoading, jobItems } as const;
 }

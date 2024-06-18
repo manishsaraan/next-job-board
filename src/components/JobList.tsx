@@ -8,6 +8,7 @@ type JobListProp = {
   isLoading: boolean;
 };
 export function JobList({ jobItems, isLoading }: JobListProp) {
+  console.log(jobItems, "jobItems");
   const id = useGetActiveid();
   return (
     <ul className="job-list">

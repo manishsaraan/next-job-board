@@ -1,6 +1,7 @@
 import { BASE_URL } from "../constants";
 import { JobItemExpanded } from "../types";
 import { useQuery } from "@tanstack/react-query";
+import handleError from "../utils/handleError";
 
 // export default function useJobItem(id: number | null) {
 //   const [jobItem, setJobItem] = useState<JobItemExpanded | null>(null);
@@ -49,7 +50,7 @@ export default function useJobItemss(id: number | null) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: !!id,
-      onError: () => {},
+      onError: handleError,
     }
   );
 
