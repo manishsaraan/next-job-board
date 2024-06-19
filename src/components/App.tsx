@@ -21,8 +21,9 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearchText = useDebounce(searchText, 250);
   const { isLoading, jobItems } = useJobItems(debouncedSearchText);
-  const jobItemSliced = jobItems?.slice(0, 7);
+  const jobItemSliced = jobItems?.slice(currentPage * 7 - 7, currentPage * 7);
   const totalNumberOfResults = jobItems?.length;
+  const totalNumberOfPages = totalNumberOfResults / 7;
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -54,6 +55,7 @@ function App() {
           </SidebarTop>
           <JobList isLoading={isLoading} jobItems={jobItemSliced} />
           <PaginationControls
+            totalNumberOfPages={totalNumberOfPages}
             currentPage={currentPage}
             onChangePage={handleChangePage}
           />

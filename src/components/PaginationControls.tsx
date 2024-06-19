@@ -4,6 +4,7 @@ type PaginationDirection = "next" | "previous";
 type PaginationControlsProp = {
   onChangePage: (direction: PaginationDirection) => void;
   currentPage: number;
+  totalNumberOfPages: number;
 };
 
 type PaginationButtonProp = {
@@ -15,6 +16,7 @@ type PaginationButtonProp = {
 export default function PaginationControls({
   onChangePage,
   currentPage,
+  totalNumberOfPages,
 }: PaginationControlsProp) {
   return (
     <section className="pagination">
@@ -23,11 +25,13 @@ export default function PaginationControls({
         direction={"previous"}
         onClick={onChangePage}
       />
-      <PaginationButton
-        currentPage={currentPage}
-        direction={"next"}
-        onClick={onChangePage}
-      />
+      {currentPage <= totalNumberOfPages && (
+        <PaginationButton
+          currentPage={currentPage}
+          direction={"next"}
+          onClick={onChangePage}
+        />
+      )}
     </section>
   );
 }
@@ -39,7 +43,13 @@ function PaginationButton({
 }: PaginationButtonProp) {
   const calculatedPage = currentPage <= 1 ? 1 : currentPage;
   return (
-    <button onClick={() => onClick(direction)} className="pagination__button">
+    <button
+      onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.currentTarget.blur();
+        onClick(direction);
+      }}
+      className="pagination__button"
+    >
       {" "}
       {direction === "next" ? <ArrowRightIcon /> : <ArrowLeftIcon />}Page{" "}
       {direction === "next" ? calculatedPage + 1 : calculatedPage - 1}
