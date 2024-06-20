@@ -3,7 +3,7 @@ export type JobItem = {
   badgeLetters: string;
   title: string;
   company: string;
-  daysAgo: string;
+  daysAgo: number;
 };
 
 export type JobItemExpanded = JobItem & {
@@ -15,4 +15,8 @@ export type JobItemExpanded = JobItem & {
   location: string;
   coverImgURL: string;
   compayURL: string;
+  daysAgo: number;
+  relevanceScore: number;
 };
+
+export type SortBy = "relevant" | "recent";

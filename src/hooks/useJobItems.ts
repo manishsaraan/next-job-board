@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { JobItem } from "../types";
+import { JobItem, JobItemExpanded } from "../types";
 import { BASE_URL } from "../constants";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -38,7 +38,7 @@ const fetchJobItems = async (
 ): Promise<{
   public: boolean;
   sorted: boolean;
-  jobItems: JobItem[];
+  jobItems: JobItemExpanded[];
 }> => {
   const res = await fetch(`${BASE_URL}?search=${searchText}`);
 

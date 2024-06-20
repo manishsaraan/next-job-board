@@ -1,13 +1,33 @@
-export default function SortingControls() {
+import { SortBy } from "../types";
+
+type SortingControlsRef = {
+  onClick: (type: SortBy) => void;
+  sortBy: string;
+};
+
+export default function SortingControls({
+  onClick,
+  sortBy,
+}: SortingControlsRef) {
   return (
     <section className="sorting">
-      <i className="fa-solid fa-arrow-down-short-wide"></i>
+      <i className={`fa-solid fa-arrow-down-short-wide`}></i>
 
-      <button className="sorting__button sorting__button--relevant">
+      <button
+        onClick={() => onClick("relevant")}
+        className={`sorting__button sorting__button--relevant ${
+          sortBy === "relevant" && "sorting__button--active"
+        } `}
+      >
         Relevant
       </button>
 
-      <button className="sorting__button sorting__button--recent">
+      <button
+        onClick={() => onClick("recent")}
+        className={`sorting__button sorting__button--recent ${
+          sortBy === "recent" && "sorting__button--active"
+        } `}
+      >
         Recent
       </button>
     </section>
