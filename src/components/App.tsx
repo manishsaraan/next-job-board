@@ -16,7 +16,7 @@ import useJobItems from "../hooks/useJobItems";
 import useDebounce from "../hooks/useDebounce";
 import { Toaster } from "react-hot-toast";
 import { RESULTS_PER_PAGE } from "../constants";
-import { JobItemExpanded, SortBy } from "../types";
+import { type PageDirection, type SortBy } from "../types";
 
 function App() {
   const [searchText, setSearchText] = useState("");
@@ -45,7 +45,7 @@ function App() {
     setSearchText(e.target.value);
   };
 
-  const handleChangePage = (direction: "next" | "previous") => {
+  const handleChangePage = (direction: PageDirection) => {
     if (direction === "next") {
       setCurrentPage((prev) => prev + 1);
     } else if (direction === "previous") {
