@@ -25,7 +25,7 @@ function App() {
 
   const debouncedSearchText = useDebounce(searchText, 250);
   const { isLoading, jobItems } = useJobItems(debouncedSearchText);
-  const jobItemsSorted = jobItems?.sort((a, b) => {
+  const jobItemsSorted = [...(jobItems || [])].sort((a, b) => {
     if (sortBy === "relevant") {
       return b.relevanceScore - a?.relevanceScore;
     } else if (sortBy === "recent") {
