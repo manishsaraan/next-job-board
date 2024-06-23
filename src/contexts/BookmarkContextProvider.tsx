@@ -1,9 +1,13 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import useJobItems from "../hooks/useJobItems";
+import { JobItemExpanded } from "../types";
 
 type BookmarkContextProp = {
   handleToggleBookmark: (id: number) => void;
   bookmarkIds: number[];
+  isLoading: boolean;
+  bookmarkedJobItems: JobItemExpanded[]
 };
 const BookmarkContext = createContext<BookmarkContextProp | null>(null);
 
@@ -17,6 +21,11 @@ export default function BookmarkContextProvider({
     []
   );
 
+  console.log(bookmarkIds,"bookmarkIds")
+
+  const { isLoading, jobItems: fetchedJobItems} =  useJobItems(bookmarkIds);
+
+  console.log(fetchedJobItems,"*********************fetchedJobItems*************", isLoading)
   const handleToggleBookmark = (id: number) => {
     if (bookmarkIds.includes(id)) {
       setBookmarkIds((prev) => prev.filter((item) => item !== id));
@@ -29,7 +38,9 @@ export default function BookmarkContextProvider({
     <BookmarkContext.Provider
       value={{
         bookmarkIds,
-        handleToggleBookmark,
+        handleToggleBookmark, 
+        isLoading,
+        bookmarkedJobItems:fetchedJobItems
       }}
     >
       {children}
@@ -44,6 +55,8 @@ export const useBookmarkIdsContext = () => {
     throw new Error("Bookmark Context is missing");
   }
 
-  const { handleToggleBookmark, bookmarkIds } = ctx;
-  return { handleToggleBookmark, bookmarkIds };
+
+ 
+  const { handleToggleBookmark, bookmarkIds, isLoading, bookmarkedJobItems } = ctx;
+  return { handleToggleBookmark, bookmarkIds,  isLoading, bookmarkedJobItems };
 };
