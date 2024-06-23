@@ -63,7 +63,7 @@ export default function useJobItems(ids: number[]):UseJobItems {
   } 
   );
 
-  const jobItems = results.map(item => item.data?.jobItem).filter(jobItem => jobItem !== undefined)
+  const jobItems = results.map(item => item.data?.jobItem).filter(jobItem => jobItem !== undefined) as JobItemExpanded[];
   const isLoading = results.some(job => job.isLoading);
  
   return {
