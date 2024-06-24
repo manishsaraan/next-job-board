@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import JobList from "./JobList";
 import { useBookmarkIdsContext } from "../contexts/BookmarkContextProvider";
-import useJobItems from "../hooks/useJobItems";
+ 
+type BookmarksPopoverProps = {
 
-export default function BookmarksPopover() {
+}
+const BookmarksPopover = forwardRef<HTMLDivElement, BookmarksPopoverProps>((_ , ref) => {
    const {  bookmarkedJobItems, isLoading } =  useBookmarkIdsContext(); 
  
-  return <div className="bookmarks-popover">
+  return <div ref={ref} className="bookmarks-popover">
     <JobList jobItems={bookmarkedJobItems} isLoading={isLoading} />
   </div>;
-}
+})
+
+export default BookmarksPopover
