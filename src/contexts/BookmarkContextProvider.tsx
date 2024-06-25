@@ -19,13 +19,10 @@ export default function BookmarkContextProvider({
   const [bookmarkIds, setBookmarkIds] = useLocalStorage<number[]>(
     "bookmarks",
     []
-  );
-
-  console.log(bookmarkIds,"bookmarkIds")
+  ); 
 
   const { isLoading, jobItems: fetchedJobItems} =  useJobItems(bookmarkIds);
 
-  console.log(fetchedJobItems,"*********************fetchedJobItems*************", isLoading)
   const handleToggleBookmark = (id: number) => {
     if (bookmarkIds.includes(id)) {
       setBookmarkIds((prev) => prev.filter((item) => item !== id));

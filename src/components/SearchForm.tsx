@@ -1,9 +1,8 @@
-type SearchFormProp = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  searchText: string;
-};
+import { useSearchTextContext } from "../contexts/SearchContextProvider";
 
-export default function SearchForm({ onChange, searchText }: SearchFormProp) {
+ 
+export default function SearchForm() {
+  const {searchText, onSearchTextChange} =  useSearchTextContext();
   return (
     <form
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -18,7 +17,7 @@ export default function SearchForm({ onChange, searchText }: SearchFormProp) {
 
       <input
         value={searchText}
-        onChange={onChange}
+        onChange={onSearchTextChange}
         spellCheck="false"
         type="text"
         required

@@ -1,12 +1,8 @@
+import { useJobItemsContext } from "../contexts/JobItemsContext";
 import useDebounce from "../hooks/useDebounce";
 
-type ResultsCountProp = {
-  totalNumberOfResults: number;
-};
-
-export default function ResultsCount({
-  totalNumberOfResults,
-}: ResultsCountProp) {
+export default function ResultsCount( ) {
+  const { totalNumberOfResults } = useJobItemsContext()
   const debouncedResults = useDebounce(totalNumberOfResults, 1000);
   return (
     <p className="count">

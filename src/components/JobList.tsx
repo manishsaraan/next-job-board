@@ -1,4 +1,5 @@
 import { useActiveIdContext } from "../contexts/ActiveIdContextProvider";
+import { useJobItemsContext } from "../contexts/JobItemsContext";
 import { JobItem } from "../types";
 import JobListItem from "./JobListItem";
 import Spinner from "./Spinner";
@@ -8,7 +9,7 @@ type JobListProp = {
   isLoading: boolean;
 };
 export function JobList({ jobItems, isLoading }: JobListProp) {
-  console.log(jobItems, "jobItems");
+ 
   const { activeId } = useActiveIdContext();
   return (
     <ul className="job-list">
